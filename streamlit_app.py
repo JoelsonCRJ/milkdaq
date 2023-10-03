@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 import requests
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -9,6 +10,7 @@ st.set_page_config(
     page_title='Milkdaq',
     layout='wide'
 )
+st_autorefresh(interval=1*60*1000, key='dataframerefresh')
 
 janela = 24  # horas
 qtd_pontos_hora = 12  # um ponto a cada 5min
