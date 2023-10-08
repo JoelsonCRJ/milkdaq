@@ -12,7 +12,7 @@ st.set_page_config(
 )
 st_autorefresh(interval=1*60*1000, key='dataframerefresh')
 
-janela = 24  # horas
+janela = 36  # horas
 qtd_pontos_hora = 12  # um ponto a cada 5min
 
 qtd = int(janela*qtd_pontos_hora)
@@ -31,7 +31,7 @@ r.close()
 df_dist = pd.DataFrame.from_records(data).drop(['entry_id'], axis=1)
 df_dist['created_at'] = pd.to_datetime(df_dist['created_at'])
 df_dist['field2'] = df_dist['field2'].astype(float)
-df_dist['nivel'] = round((1.05 - (df_dist['field2']/1000)), 3)
+df_dist['nivel'] = round((0.985 - (df_dist['field2']/1000)), 3)
 
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.075)
 
@@ -40,9 +40,9 @@ fig.add_trace(go.Scatter(
 fig.add_trace(go.Scatter(
     x=df_dist['created_at'], y=df_dist['nivel'], name='Nível', mode='lines+markers'), row=2, col=1)
 
-fig.layout.yaxis.range = [0, 30]
+fig.layout.yaxis.range = [-1, 20]
 fig.layout.xaxis.range = [df_temp['created_at'].max(
-) - pd.Timedelta(12, 'h'), df_temp['created_at'].max()]
+) - pd.Timedelta(24, 'h'), df_temp['created_at'].max() + pd.Timedelta(1, 'h')]
 fig.layout.yaxis.title = 'Temperatura do Leite (°C)'
 fig.layout.yaxis2.range = [0, 1]
 fig.layout.yaxis2.title = 'Nível do Tanque (m)'
