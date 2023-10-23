@@ -33,7 +33,7 @@ r.close()
 df_dist = pd.DataFrame.from_records(data).drop(['entry_id'], axis=1)
 df_dist['created_at'] = pd.to_datetime(df_dist['created_at'])
 df_dist['field2'] = df_dist['field2'].astype(float)
-df_dist['nivel'] = round((1.011 - (df_dist['field2']/1000)), 3)
+df_dist['nivel'] = round((0.961 - (df_dist['field2']/1000)), 3)
 df_dist['volume'] = round(3.3329156*df_dist['nivel']+0.1, 3)*1000
 
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.075)
@@ -47,8 +47,8 @@ fig.layout.yaxis.range = [-2, 20]
 fig.layout.xaxis.range = [df_temp['created_at'].max(
 ) - pd.Timedelta(24, 'h'), df_temp['created_at'].max() + pd.Timedelta(1, 'h')]
 fig.layout.yaxis.title = 'Temperatura do Leite (°C)'
-fig.layout.yaxis2.range = [0, 2000]
-fig.layout.yaxis2.title = 'Volume do Tanque (m)'
+fig.layout.yaxis2.range = [0, 3000]
+fig.layout.yaxis2.title = 'Volume do Tanque (L)'
 
 fig.update_layout(autosize=False,
                   width=1200,
