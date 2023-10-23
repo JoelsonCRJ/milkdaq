@@ -48,7 +48,7 @@ fig.add_trace(go.Scatter(
 fig.add_trace(go.Scatter(
     x=df_dist['created_at'], y=df_dist['volume'], name='Volume', mode='lines+markers'), row=2, col=1)
 
-fig.layout.yaxis.range = [-2, 20]
+fig.layout.yaxis.range = [-2, 26]
 fig.layout.xaxis.range = [df_temp['created_at'].max(
 ) - pd.Timedelta(24, 'h'), df_temp['created_at'].max() + pd.Timedelta(1, 'h')]
 fig.layout.yaxis.title = 'Temperatura do Leite (°C)'
