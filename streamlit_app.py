@@ -24,6 +24,9 @@ r.close()
 df_temp = pd.DataFrame.from_records(data).drop(['entry_id'], axis=1)
 df_temp['created_at'] = pd.to_datetime(df_temp['created_at'])
 df_temp['field1'] = round(df_temp['field1'].astype(float), 2)
+id = df_temp[df_temp['field1'] > 24.9].index
+df_temp.loc[id, 'field1'] = np.nan
+df_temp['field1'] = df_temp['field1'].ffill()
 
 # read_dist = f"https://api.thingspeak.com/channels/2222170/fields/2.json?api_key=O2J4LQKR35J19LHP&timezone=America%2FSao_Paulo&results={qtd}"
 read_dist = f"https://api.thingspeak.com/channels/2310964/fields/2.json?api_key=3ZRLQ9I44OS58W54&timezone=America%2FSao_Paulo&results={qtd}"
