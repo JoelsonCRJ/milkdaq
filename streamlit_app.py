@@ -34,7 +34,7 @@ df_dist = pd.DataFrame.from_records(data).drop(['entry_id'], axis=1)
 df_dist['created_at'] = pd.to_datetime(df_dist['created_at'])
 df_dist['field2'] = df_dist['field2'].astype(float)
 df_dist['nivel'] = round((1.011 - (df_dist['field2']/1000)), 3)
-df_dist['volume'] = round(3.3329156*df_dist['nivel']+100, 1)
+df_dist['volume'] = round(3.3329156*df_dist['nivel']+0.1, 3)*1000
 
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.075)
 
